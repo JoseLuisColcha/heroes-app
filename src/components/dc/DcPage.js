@@ -1,3 +1,10 @@
+import { Herolist } from '../hero/Herolist'
+
 export const DcPage = () => {
-	return <div>DcPage</div>
+	return (
+		<div>
+			<h1>DC Heroes</h1>
+			<Herolist publisher='DC Comics' />
+		</div>
+	)
 }
