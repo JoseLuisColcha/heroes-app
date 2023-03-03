@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 
 export const HeroCard = props => {
-	const { id, superhero, publisher, alter_ego, first_appearance, characters } =
-		props
+	const { id, superhero, alter_ego, first_appearance, characters } = props
 	const imagePath = `/assets/${id}.jpg`
 	return (
 		<div className='col'>
