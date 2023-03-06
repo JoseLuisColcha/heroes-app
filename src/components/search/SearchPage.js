@@ -3,6 +3,7 @@ import { HeroCard } from '../hero/HeroCard'
 import { useForm } from '../hooks/useForm'
 import { getHeroesByName } from '../selectors/getHeroesByName'
 import queryString from 'query-string'
+import { useMemo } from 'react'
 
 export default function SearchPage() {
 	const navigate = useNavigate()
@@ -14,7 +15,7 @@ export default function SearchPage() {
 
 	const { searchText } = formValues
 
-	const heroesFiltered = getHeroesByName(q)
+	const heroesFiltered = useMemo(() => getHeroesByName(q), [q])
 
 	const handleSearch = e => {
 		e.preventDefault()
@@ -53,6 +54,18 @@ export default function SearchPage() {
 				<div className='col-7'>
 					<h4>Resultados</h4>
 					<hr />
+					{q === '' ? (
+						<div className='alert alert-info animate__animated animate__bounce'>
+							{' '}
+							Ingresa un heroé!
+						</div>
+					) : (
+						heroesFiltered.length === 0 && (
+							<div className='alert alert-danger animate__animated animate__bounce'>
+								No hay resultados para {q}
+							</div>
+						)
+					)}
 
 					{heroesFiltered.map(hero => (
 						<HeroCard key={hero.id} {...hero} />
